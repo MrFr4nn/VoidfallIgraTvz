@@ -8,4 +8,8 @@ public class VoidbornNPC extends Frakcija {
         super(naziv);
         this.threatLevel = 1;
     }
+
+    public void setThreatLevel(int threatLevel) {
+        this.threatLevel = threatLevel;
+    }
 }

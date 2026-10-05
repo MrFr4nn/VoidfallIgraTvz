@@ -13,4 +13,16 @@ public class AkcijskaKartica implements Serializable {
         this.odabranaOpcija = odabranaOpcija;
         this.redoslijed = redoslijed;
     }
+
+    public TipKartice getTip() {
+        return tip;
+    }
+
+    public char getOdabranaOpcija() {
+        return odabranaOpcija;
+    }
+
+    public int getRedoslijed() {
+        return redoslijed;
+    }
 }

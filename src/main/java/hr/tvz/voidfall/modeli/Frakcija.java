@@ -17,4 +17,12 @@ public class Frakcija implements Serializable {
         this.sektori = new ArrayList<>();
         this.frakcijskaPloca = new FrakcijskaPloca();
     }
+
+    public List<Sektor> getSektori() {
+        return sektori;
+    }
+
+    public void dodajSektor(Sektor sektor) {
+        sektori.add(sektor);
+    }
 }

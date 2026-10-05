@@ -11,4 +11,16 @@ public class Igrac extends Frakcija {
         super(naziv);
         this.trenutniPlan = new ArrayList<>();
     }
+
+    public List<AkcijskaKartica> getTrenutniPlan() {
+        return trenutniPlan;
+    }
+
+    public void dodajKarticuUPlan(AkcijskaKartica kartica) {
+        trenutniPlan.add(kartica);
+    }
+
+    public void ocistiPlan() {
+        trenutniPlan.clear();
+    }
 }

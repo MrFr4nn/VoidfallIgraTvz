@@ -19,4 +19,28 @@ public class StanjeIgre implements Serializable {
         this.faza = Faza.PLANIRANJE;
         this.redniBrojCiklusa = 1;
     }
+
+    public Igrac getIgrac() {
+        return igrac;
+    }
+
+    public VoidbornNPC getVoidborn() {
+        return voidborn;
+    }
+
+    public Faza getFaza() {
+        return faza;
+    }
+
+    public void setFaza(Faza faza) {
+        this.faza = faza;
+    }
+
+    public int getRedniBrojCiklusa() {
+        return redniBrojCiklusa;
+    }
+
+    public void sljedeciCiklus() {
+        redniBrojCiklusa++;
+    }
 }

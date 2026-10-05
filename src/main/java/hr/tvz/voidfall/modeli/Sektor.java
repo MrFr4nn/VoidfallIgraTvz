@@ -27,4 +27,24 @@ public class Sektor implements Serializable {
         this.crisisBrojac = 0;
         this.deaktiviran = false;
     }
+
+    public int getVojska() {
+        return vojska;
+    }
+
+    public void setVojska(int vojska) {
+        this.vojska = vojska;
+    }
+
+    public int getMaterijali() {
+        return materijali;
+    }
+
+    public void setMaterijali(int materijali) {
+        this.materijali = materijali;
+    }
+
+    public void setUtjecaj(int utjecaj) {
+        this.utjecaj = utjecaj;
+    }
 }
