@@ -59,7 +59,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>hr.tvz.voidfall/hr.tvz.voidfall.aplikacija.GlavnaAplikacija</mainClass>
+                            <mainClass>hr.tvz.voidfall/hr.tvz.voidfall.GlavnaAplikacija</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
