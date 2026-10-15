@@ -1,0 +1,34 @@
+.root {
+    -fx-background-color: white;
+    -fx-font-size: 13px;
+}
+.label {
+    -fx-text-fill: black;
+}
+.okvir {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-padding: 8;
+}
+.naslov {
+    -fx-font-weight: bold;
+}
+.button {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-text-fill: black;
+}
+.button:hover {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+.text-area .content {
+    -fx-background-color: white;
+}
+.text-area {
+    -fx-focus-color: black;
+    -fx-faint-focus-color: transparent;
+}
+.progress-bar .bar {
+    -fx-background-color: black;
+}
