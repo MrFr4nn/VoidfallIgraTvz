@@ -5,5 +5,6 @@ public enum VrstaKartice {
     ISTRAZIVANJE,
     DIPLOMACIJA,
     POPRAVAK,
-    ORBITALNI_NAPAD
+    ORBITALNI_NAPAD,
+    KORUPCIJA
 }
