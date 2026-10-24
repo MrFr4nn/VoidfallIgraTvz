@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="igra">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="dogadaj" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="runda" type="xs:int" use="required"/>
+                        <xs:attribute name="vrsta" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="KARTA"/>
+                                    <xs:enumeration value="NAPAD"/>
+                                    <xs:enumeration value="KORUPCIJA"/>
+                                    <xs:enumeration value="KRAJ_RUNDE"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="zdravljeIgraca" type="xs:int" use="required"/>
+                        <xs:attribute name="zdravljeVoidborna" type="xs:int" use="required"/>
+                        <xs:attribute name="korupcija" type="xs:int" use="required"/>
+                        <xs:attribute name="opis" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
