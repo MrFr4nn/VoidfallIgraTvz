@@ -90,10 +90,11 @@ public class VoidfallEngine {
     }
 
     public String zavrsiRundu() {
-        String poruka = "Uvjet ispunjen, korupcija se ne mijenja.";
+        String uvjet = korupcija.kratkiOpis(runda);
+        String poruka = "KRAJ RUNDE " + runda + ". Uvjet \"" + uvjet + "\" je ispunjen, korupcija se ne mijenja.";
         if (!korupcija.uvjetIspunjen(runda)) {
             korupcija.promijeni(1);
-            poruka = "Uvjet NIJE ispunjen, korupcija raste za 1.";
+            poruka = "KRAJ RUNDE " + runda + ". Uvjet \"" + uvjet + "\" NIJE ispunjen, korupcija raste za 1.";
             zapisi("KORUPCIJA", poruka);
         }
         zapisi("KRAJ_RUNDE", "Kraj runde " + runda + ".");

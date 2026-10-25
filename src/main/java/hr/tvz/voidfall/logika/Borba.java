@@ -33,10 +33,19 @@ public class Borba {
             ime = "Igrač";
         }
         int steta = izracunajStetu(napadac, branitelj);
+        String poruka = ime + " napada (napad " + napadac.getNapad() + ", obrana branitelja "
+                + branitelj.getObrana() + "): šteta " + steta + ".";
+        if (steta == 0 && branitelj.getObrana() > 0) {
+            branitelj.setObrana(branitelj.getObrana() - 1);
+            poruka += " Obrana popušta na " + branitelj.getObrana() + ".";
+        }
         branitelj.setZdravlje(branitelj.getZdravlje() - steta);
         provjeriKraj();
-        return ime + " napada (napad " + napadac.getNapad() + ", obrana " + branitelj.getObrana()
-                + "): šteta " + steta + ".";
+        return poruka;
+    }
+
+    public boolean bezSanse() {
+        return igrac.getNapad() == 0 && voidborn.getNapad() == 0;
     }
 
     public void provjeriKraj() {

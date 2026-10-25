@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="600.0" prefWidth="950.0" stylesheets="@stil.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.voidfall.kontroleri.ReplayKontroler">
+    <top>
+        <VBox spacing="6.0" styleClass="okvir" BorderPane.alignment="CENTER">
+            <children>
+                <Label styleClass="veliki" text="REPLAY IGRE" />
+                <Label fx:id="oznakaSax" text="SAX" wrapText="true" />
+                <Label fx:id="oznakaTrenutnog" styleClass="naslov" text="Replay počinje" wrapText="true" />
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+        </VBox>
+    </top>
+    <center>
+        <TextArea fx:id="tekstReplaya" editable="false" wrapText="true" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets left="10.0" right="10.0" />
+            </BorderPane.margin>
+        </TextArea>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" spacing="12.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="gumbPrethodni" onAction="#prethodniPotez" prefWidth="170.0" text="PRETHODNI POTEZ" />
+                <Button fx:id="gumbPauza" onAction="#pauziraj" prefWidth="200.0" text="PAUZA (ručno)" />
+                <Button fx:id="gumbSljedeci" onAction="#sljedeciPotez" prefWidth="170.0" text="SLJEDEĆI POTEZ" />
+                <Label fx:id="oznakaPoteza" text="Potez 0 / 0" />
+                <Button fx:id="gumbZatvori" onAction="#zatvori" prefWidth="120.0" text="ZATVORI" />
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>

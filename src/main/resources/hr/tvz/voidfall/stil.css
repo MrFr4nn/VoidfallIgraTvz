@@ -1,6 +1,6 @@
 .root {
     -fx-background-color: white;
-    -fx-font-size: 13px;
+    -fx-font-size: 12px;
 }
 .label {
     -fx-text-fill: black;
@@ -8,10 +8,14 @@
 .okvir {
     -fx-border-color: black;
     -fx-border-width: 2;
-    -fx-padding: 8;
+    -fx-padding: 6;
 }
 .naslov {
     -fx-font-weight: bold;
+}
+.veliki {
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
 }
 .button {
     -fx-background-color: white;
@@ -22,6 +26,9 @@
     -fx-background-color: black;
     -fx-text-fill: white;
 }
+.button:disabled {
+    -fx-opacity: 0.4;
+}
 .text-area .content {
     -fx-background-color: white;
 }
@@ -31,4 +38,9 @@
 }
 .progress-bar .bar {
     -fx-background-color: black;
+    -fx-background-insets: 0;
+}
+.progress-bar .track {
+    -fx-background-color: white;
+    -fx-border-color: black;
 }

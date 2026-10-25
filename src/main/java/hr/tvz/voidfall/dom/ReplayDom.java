@@ -17,15 +17,9 @@ public class ReplayDom {
             DocumentBuilder graditelj = tvornica.newDocumentBuilder();
             Document dokument = graditelj.parse(new File(datoteka));
             NodeList dogadaji = dokument.getElementsByTagName("dogadaj");
-            int prethodnaRunda = 0;
             for (int i = 0; i < dogadaji.getLength(); i++) {
                 Element dogadaj = (Element) dogadaji.item(i);
-                int runda = Integer.parseInt(dogadaj.getAttribute("runda"));
-                if (runda != prethodnaRunda) {
-                    redovi.add("=== REPLAY: RUNDA " + runda + " ===");
-                    prethodnaRunda = runda;
-                }
-                redovi.add(dogadaj.getAttribute("opis")
+                redovi.add("Runda " + dogadaj.getAttribute("runda") + " | " + dogadaj.getAttribute("opis")
                         + "  [zdravlje igrača " + dogadaj.getAttribute("zdravljeIgraca")
                         + ", Voidborna " + dogadaj.getAttribute("zdravljeVoidborna")
                         + ", korupcija " + dogadaj.getAttribute("korupcija") + "]");
