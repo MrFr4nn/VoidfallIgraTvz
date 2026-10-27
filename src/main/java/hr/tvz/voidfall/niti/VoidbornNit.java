@@ -2,6 +2,7 @@ package hr.tvz.voidfall.niti;
 
 import hr.tvz.voidfall.kontroleri.GlavniKontroler;
 import hr.tvz.voidfall.logika.VoidfallEngine;
+import hr.tvz.voidfall.modeli.AkcijskaKartica;
 import javafx.application.Platform;
 
 public class VoidbornNit implements Runnable {
@@ -17,17 +18,22 @@ public class VoidbornNit implements Runnable {
     public void run() {
         int brojKoraka = engine.getIgrac().getOdabranePlan().size();
         for (int i = 0; i < brojKoraka; i++) {
-            pricekaj(1500);
+            pricekaj(800);
             if (engine.getBorba().isKraj()) {
                 break;
             }
-            String poruka = engine.odigrajKorak(i);
-            Platform.runLater(() -> {
-                kontroler.prikaziPoruku(poruka);
-                kontroler.osvjeziSucelje();
-            });
+            engine.odigrajKorak(i);
+            AkcijskaKartica kartaIgraca = engine.getZadnjaKartaIgraca();
+            AkcijskaKartica kartaVoidborna = engine.getZadnjaKartaVoidborna();
+            if (kartaIgraca != null) {
+                kontroler.letKarte(kartaIgraca, true, i);
+            }
+            if (kartaVoidborna != null) {
+                kontroler.letKarte(kartaVoidborna, false, i);
+            }
+            Platform.runLater(() -> kontroler.osvjeziSucelje());
         }
-        pricekaj(1500);
+        pricekaj(1000);
         Platform.runLater(() -> kontroler.zavrsiPlan());
     }
 

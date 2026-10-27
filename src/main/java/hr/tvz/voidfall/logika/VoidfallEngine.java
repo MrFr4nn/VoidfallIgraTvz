@@ -7,18 +7,18 @@ import hr.tvz.voidfall.modeli.Sektor;
 import hr.tvz.voidfall.modeli.VrstaKartice;
 import hr.tvz.voidfall.serijalizacija.StanjeIgre;
 import hr.tvz.voidfall.xml.XmlZapisivac;
-import java.util.ArrayList;
 
 public class VoidfallEngine {
     private Igrac igrac;
     private Sektor voidborn;
-    private int runda;
-    private ArrayList<String> voidbornPlan;
+    private int runda;                          // 1 do 4
     private Korupcija korupcija;
     private Borba borba;
     private XmlZapisivac zapisivac;
     private Spil spil = new Spil();
     private VoidbornNPC npc = new VoidbornNPC();
+    private AkcijskaKartica zadnjaKartaIgraca;
+    private AkcijskaKartica zadnjaKartaVoidborna;
 
     public VoidfallEngine() {
         novaIgra();
@@ -28,7 +28,6 @@ public class VoidfallEngine {
         igrac = new Igrac("Igrač");
         voidborn = new Sektor();
         zapisivac = new XmlZapisivac();
-        voidbornPlan = new ArrayList<>();
         runda = 1;
         postaviPomocneKlase();
         podijeliKarte();
@@ -42,7 +41,6 @@ public class VoidfallEngine {
     private void podijeliKarte() {
         igrac.getRuka().clear();
         igrac.getOdabranePlan().clear();
-        voidbornPlan.clear();
         if (runda <= 3) {
             spil.podijeliRuku(igrac);
         }
@@ -65,8 +63,14 @@ public class VoidfallEngine {
     }
 
     public String odigrajKorak(int broj) {
+        zadnjaKartaIgraca = null;
+        zadnjaKartaVoidborna = null;
+        if (broj >= igrac.getOdabranePlan().size()) {
+            return "";
+        }
         AkcijskaKartica karta = igrac.getOdabranePlan().get(broj);
-        String poruka = "Igrač: " + karta.getNaziv() + " - "
+        zadnjaKartaIgraca = karta;
+        String poruka = igrac.getIme() + ": " + karta.getNaziv() + " - "
                 + spil.odigrajKartu(karta, igrac.getSektor(), voidborn, korupcija);
         zapisi("KARTA", poruka);
         borba.provjeriKraj();
@@ -75,9 +79,9 @@ public class VoidfallEngine {
         }
         VrstaKartice odluka = npc.odaberiKartu(voidborn, igrac.getSektor(), korupcija.razinaPrijetnje());
         AkcijskaKartica kartaVoidborna = spil.napraviKarticu(odluka);
+        zadnjaKartaVoidborna = kartaVoidborna;
         String porukaVoidborna = "Voidborn: " + kartaVoidborna.getNaziv() + " - "
                 + spil.odigrajKartu(kartaVoidborna, voidborn, igrac.getSektor(), korupcija);
-        voidbornPlan.add(kartaVoidborna.getNaziv());
         String vrsta = "KARTA";
         if (odluka == VrstaKartice.ORBITALNI_NAPAD) {
             vrsta = "NAPAD";
@@ -91,10 +95,14 @@ public class VoidfallEngine {
 
     public String zavrsiRundu() {
         String uvjet = korupcija.kratkiOpis(runda);
-        String poruka = "KRAJ RUNDE " + runda + ". Uvjet \"" + uvjet + "\" je ispunjen, korupcija se ne mijenja.";
-        if (!korupcija.uvjetIspunjen(runda)) {
+        int prije = igrac.getSektor().getKorupcija();
+        String poruka;
+        if (korupcija.uvjetIspunjen(runda)) {
+            poruka = "KRAJ RUNDE " + runda + ". Uvjet runde: " + uvjet + " - ISPUNJEN, korupcija ostaje " + prije + ".";
+        } else {
             korupcija.promijeni(1);
-            poruka = "KRAJ RUNDE " + runda + ". Uvjet \"" + uvjet + "\" NIJE ispunjen, korupcija raste za 1.";
+            poruka = "KRAJ RUNDE " + runda + ". Uvjet runde: " + uvjet + " - NIJE ispunjen, korupcija raste s "
+                    + prije + " na " + igrac.getSektor().getKorupcija() + ". Veća korupcija znači jačeg Voidborna.";
             zapisi("KORUPCIJA", poruka);
         }
         zapisi("KRAJ_RUNDE", "Kraj runde " + runda + ".");
@@ -114,18 +122,6 @@ public class VoidfallEngine {
                 voidborn.getZdravlje(), igrac.getSektor().getKorupcija());
     }
 
-    public String planIgraca() {
-        ArrayList<String> imena = new ArrayList<>();
-        for (int i = 0; i < igrac.getOdabranePlan().size(); i++) {
-            imena.add(igrac.getOdabranePlan().get(i).getNaziv());
-        }
-        return spil.sastaviPlan(imena, "-");
-    }
-
-    public String planVoidborna() {
-        return spil.sastaviPlan(voidbornPlan, "?");
-    }
-
     public StanjeIgre uzmiStanje() {
         return new StanjeIgre(igrac, voidborn, runda);
     }
@@ -134,7 +130,6 @@ public class VoidfallEngine {
         igrac = stanje.getIgrac();
         voidborn = stanje.getVoidborn();
         runda = stanje.getRunda();
-        voidbornPlan.clear();
         postaviPomocneKlase();
     }
 
@@ -160,5 +155,13 @@ public class VoidfallEngine {
 
     public Borba getBorba() {
         return borba;
+    }
+
+    public AkcijskaKartica getZadnjaKartaIgraca() {
+        return zadnjaKartaIgraca;
+    }
+
+    public AkcijskaKartica getZadnjaKartaVoidborna() {
+        return zadnjaKartaVoidborna;
     }
 }

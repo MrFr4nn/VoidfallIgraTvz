@@ -4,13 +4,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@stil.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.voidfall.kontroleri.GlavniKontroler">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@stil.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.voidfall.kontroleri.GlavniKontroler">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="okvir">
@@ -31,47 +31,54 @@
     </top>
 
     <left>
-        <HBox fx:id="okvirIgraca" styleClass="okvir">
+        <VBox fx:id="okvirIgraca" prefWidth="190.0" spacing="3.0" styleClass="okvir">
             <children>
-                <VBox prefWidth="200.0" spacing="3.0">
-                    <children>
-                        <Label styleClass="naslov" text="IGRAČEV SEKTOR" />
-                        <ProgressBar fx:id="trakaZdravljaIgraca" prefWidth="190.0" progress="1.0" />
-                        <Label fx:id="igracZdravlje" text="Zdravlje: 10/10" />
-                        <Label fx:id="igracObrana" text="Obrana: 0" />
-                        <Label fx:id="igracNapad" text="Napad: 0" />
-                        <Label styleClass="naslov" text="FRAKCIJSKA PLOČA" />
-                        <Label fx:id="igracIndustrija" text="Industrija: 0/3" />
-                        <Label fx:id="igracIstrazivanje" text="Istraživanje: 0/3" />
-                        <Label fx:id="igracDiplomacija" text="Diplomacija: 0/3" />
-                        <Label fx:id="igracNeprijatelji" text="Neprijatelji: " wrapText="true" />
-                        <Label fx:id="igracPlan" text="Plan: - | - | -" wrapText="true" />
-                    </children>
-                </VBox>
+                <HBox fx:id="neprijateljiIgracGore" minHeight="26.0" spacing="6.0" />
+                <Label styleClass="naslov" text="IGRAČEV SEKTOR" />
+                <ProgressBar fx:id="trakaZdravljaIgraca" prefWidth="170.0" progress="1.0" />
+                <Label fx:id="igracZdravlje" text="Zdravlje: 10/10" />
+                <Label fx:id="igracObrana" text="Obrana: 0" />
+                <Label fx:id="igracNapad" text="Napad: 0" />
+                <Label styleClass="naslov" text="FRAKCIJSKA PLOČA" />
+                <Label fx:id="igracIndustrija" text="Industrija: 0/3" />
+                <Label fx:id="igracIstrazivanje" text="Istraživanje: 0/3" />
+                <Label fx:id="igracDiplomacija" text="Diplomacija: 0/3" />
+                <Region VBox.vgrow="ALWAYS" />
+                <HBox fx:id="neprijateljiIgracDolje" minHeight="26.0" spacing="6.0" />
             </children>
             <BorderPane.margin>
                 <Insets bottom="5.0" left="8.0" right="4.0" top="5.0" />
             </BorderPane.margin>
-        </HBox>
+        </VBox>
     </left>
 
     <center>
-        <VBox spacing="5.0" styleClass="okvir" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" spacing="8.0" styleClass="okvir" BorderPane.alignment="CENTER">
             <children>
-                <Label styleClass="naslov" text="BORBENA ZONA" />
-                <Label fx:id="oznakaDogadaja" styleClass="naslov" text="Izaberi 3 karte" wrapText="true" />
-                <HBox alignment="CENTER_LEFT" spacing="6.0">
+                <Label fx:id="oznakaDogadaja" minHeight="80.0" styleClass="naslov" text="Odaberi 3 karte" wrapText="true" />
+                <Label text="VOIDBORN - TAJNI PLAN" />
+                <HBox alignment="CENTER" spacing="10.0">
                     <children>
-                        <Label fx:id="oznakaBorbaIgrac" text="IGRAČ 10/10" />
-                        <ProgressBar fx:id="trakaZdravljaVoidborna" prefWidth="90.0" progress="1.0" visible="false" managed="false" />
-                        <Label text="PROTIV" />
-                        <Label fx:id="oznakaBorbaVoidborn" text="VOIDBORN 10/10" />
+                        <Label fx:id="voidbornSlot1" prefHeight="55.0" prefWidth="170.0" styleClass="slot" text="?" />
+                        <Label fx:id="voidbornSlot2" prefHeight="55.0" prefWidth="170.0" styleClass="slot" text="?" />
+                        <Label fx:id="voidbornSlot3" prefHeight="55.0" prefWidth="170.0" styleClass="slot" text="?" />
                     </children>
                 </HBox>
-                <TextArea fx:id="dnevnikBorbe" editable="false" prefHeight="190.0" wrapText="true" VBox.vgrow="ALWAYS" />
-                <Label styleClass="naslov" text="UVJET RUNDE" />
+
+                <StackPane minHeight="120.0" viewOrder="-1.0">
+                    <children>
+                        <Label fx:id="letecaKarta" maxHeight="110.0" maxWidth="200.0" prefHeight="110.0" prefWidth="200.0" styleClass="karta, leteca" text="KARTA" visible="false" wrapText="true" />
+                    </children>
+                </StackPane>
+                <Label text="TVOJ PLAN" />
+                <HBox alignment="CENTER" spacing="10.0">
+                    <children>
+                        <Label fx:id="igracSlot1" prefHeight="55.0" prefWidth="170.0" styleClass="slot" text="prazno" />
+                        <Label fx:id="igracSlot2" prefHeight="55.0" prefWidth="170.0" styleClass="slot" text="prazno" />
+                        <Label fx:id="igracSlot3" prefHeight="55.0" prefWidth="170.0" styleClass="slot" text="prazno" />
+                    </children>
+                </HBox>
                 <Label fx:id="uvjetRunde" text="Uvjet runde" wrapText="true" />
-                <Label text="Industrija → obrana  |  Istraživanje → napad  |  Diplomacija → manje korupcije" wrapText="true" />
             </children>
             <BorderPane.margin>
                 <Insets bottom="5.0" left="4.0" right="4.0" top="5.0" />
@@ -80,28 +87,26 @@
     </center>
 
     <right>
-        <HBox fx:id="okvirVoidborna" styleClass="okvir">
+        <VBox fx:id="okvirVoidborna" prefWidth="190.0" spacing="3.0" styleClass="okvir">
             <children>
-                <VBox prefWidth="200.0" spacing="3.0">
-                    <children>
-                        <Label styleClass="naslov" text="VOIDBORNOV SEKTOR" />
-                        <ProgressBar prefWidth="190.0" progress="1.0" visible="false" managed="false" />
-                        <Label fx:id="voidbornZdravlje" text="Zdravlje: 10/10" />
-                        <Label fx:id="voidbornObrana" text="Obrana: 0" />
-                        <Label fx:id="voidbornNapad" text="Napad: 0" />
-                        <Label styleClass="naslov" text="FRAKCIJSKA PLOČA" />
-                        <Label fx:id="voidbornIndustrija" text="Industrija: 0/3" />
-                        <Label fx:id="voidbornIstrazivanje" text="Istraživanje: 0/3" />
-                        <Label fx:id="voidbornDiplomacija" text="Diplomacija: 0/3" />
-                        <Label fx:id="voidbornPrijetnja" text="Razina prijetnje: 1" />
-                        <Label fx:id="voidbornPlan" text="Plan: ? | ? | ?" wrapText="true" />
-                    </children>
-                </VBox>
+                <HBox fx:id="neprijateljiVoidbornGore" minHeight="26.0" spacing="6.0" />
+                <Label styleClass="naslov" text="VOIDBORNOV SEKTOR" />
+                <ProgressBar fx:id="trakaZdravljaVoidborna" prefWidth="170.0" progress="1.0" />
+                <Label fx:id="voidbornZdravlje" text="Zdravlje: 10/10" />
+                <Label fx:id="voidbornObrana" text="Obrana: 0" />
+                <Label fx:id="voidbornNapad" text="Napad: 0" />
+                <Label styleClass="naslov" text="FRAKCIJSKA PLOČA" />
+                <Label fx:id="voidbornIndustrija" text="Industrija: 0/3" />
+                <Label fx:id="voidbornIstrazivanje" text="Istraživanje: 0/3" />
+                <Label fx:id="voidbornDiplomacija" text="Diplomacija: 0/3" />
+                <Label fx:id="voidbornPrijetnja" text="Razina prijetnje: 1" />
+                <Region VBox.vgrow="ALWAYS" />
+                <HBox fx:id="neprijateljiVoidbornDolje" minHeight="26.0" spacing="6.0" />
             </children>
             <BorderPane.margin>
                 <Insets bottom="5.0" left="4.0" right="8.0" top="5.0" />
             </BorderPane.margin>
-        </HBox>
+        </VBox>
     </right>
 
     <bottom>
@@ -109,10 +114,10 @@
             <children>
                 <HBox alignment="CENTER" spacing="8.0">
                     <children>
-                        <Button fx:id="gumbKarta1" onAction="#odaberiKartu1" prefHeight="60.0" prefWidth="190.0" text="KARTA 1" wrapText="true" />
-                        <Button fx:id="gumbKarta2" onAction="#odaberiKartu2" prefHeight="60.0" prefWidth="190.0" text="KARTA 2" wrapText="true" />
-                        <Button fx:id="gumbKarta3" onAction="#odaberiKartu3" prefHeight="60.0" prefWidth="190.0" text="KARTA 3" wrapText="true" />
-                        <Button fx:id="gumbKarta4" onAction="#odaberiKartu4" prefHeight="60.0" prefWidth="190.0" text="KARTA 4" wrapText="true" />
+                        <Button fx:id="gumbKarta1" onAction="#odaberiKartu1" prefHeight="90.0" prefWidth="200.0" styleClass="karta" text="KARTA 1" wrapText="true" />
+                        <Button fx:id="gumbKarta2" onAction="#odaberiKartu2" prefHeight="90.0" prefWidth="200.0" styleClass="karta" text="KARTA 2" wrapText="true" />
+                        <Button fx:id="gumbKarta3" onAction="#odaberiKartu3" prefHeight="90.0" prefWidth="200.0" styleClass="karta" text="KARTA 3" wrapText="true" />
+                        <Button fx:id="gumbKarta4" onAction="#odaberiKartu4" prefHeight="90.0" prefWidth="200.0" styleClass="karta" text="KARTA 4" wrapText="true" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" spacing="8.0">

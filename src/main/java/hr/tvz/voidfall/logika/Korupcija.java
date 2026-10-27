@@ -66,12 +66,11 @@ public class Korupcija {
         if (runda > 3) {
             return "Završna borba: nema uvjeta.";
         }
-        String tekst = "Na kraju runde " + runda + " moraš imati: " + kratkiOpis(runda) + ".\n";
+        String tekst = "UVJET RUNDE " + runda + ": " + kratkiOpis(runda) + ".\n";
         if (uvjetIspunjen(runda)) {
-            tekst += "Za sada je ISPUNJEN.";
-        } else {
-            tekst += "Za sada NIJE ispunjen.";
+            return tekst + "STATUS: ISPUNJEN za rundu " + runda + ". Korupcija neće rasti.";
         }
-        return tekst + "\nAko na kraju runde uvjet nije ispunjen, korupcija raste za 1.";
+        return tekst + "STATUS: još NIJE ispunjen. Ako tako ostane do kraja runde " + runda
+                + ", korupcija raste za 1.";
     }
 }

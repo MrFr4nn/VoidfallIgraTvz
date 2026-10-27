@@ -24,13 +24,13 @@ public class ZavrsnaBorbaNit implements Runnable {
             Platform.runLater(() -> {
                 kontroler.prikaziPoruku(poruka);
                 kontroler.osvjeziSucelje();
-                kontroler.pulsirajSektor(napadnutJeIgrac);
+                kontroler.napadnutSektor(napadnutJeIgrac);
             });
             igracNapada = !igracNapada;
             brojNapada = brojNapada + 1;
         }
         engine.getBorba().odlukaPoZdravlju();
-        pricekaj(1500);
+        pricekaj(2500);
         Platform.runLater(() -> kontroler.zavrsiIgru());
     }
 

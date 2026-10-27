@@ -3,6 +3,7 @@ package hr.tvz.voidfall.kontroleri;
 import hr.tvz.voidfall.logika.VoidfallEngine;
 import hr.tvz.voidfall.modeli.AkcijskaKartica;
 import hr.tvz.voidfall.modeli.Sektor;
+import hr.tvz.voidfall.niti.LetKarte;
 import hr.tvz.voidfall.niti.PulsNit;
 import hr.tvz.voidfall.niti.VoidbornNit;
 import hr.tvz.voidfall.niti.ZavrsnaBorbaNit;
@@ -11,36 +12,39 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class GlavniKontroler {
     @FXML private ProgressBar trakaKorupcije, trakaZdravljaIgraca, trakaZdravljaVoidborna;
-    @FXML private Label oznakaKorupcije, oznakaRunde, oznakaCiklusa, oznakaDogadaja;
-    @FXML private Label oznakaBorbaIgrac, oznakaBorbaVoidborn, igracNeprijatelji;
-    @FXML private Label voidbornZdravlje, voidbornObrana, voidbornNapad, voidbornPlan, voidbornPrijetnja;
+    @FXML private Label oznakaKorupcije, oznakaRunde, oznakaCiklusa, oznakaDogadaja, letecaKarta;
+    @FXML private Label igracSlot1, igracSlot2, igracSlot3, voidbornSlot1, voidbornSlot2, voidbornSlot3;
+    @FXML private Label voidbornZdravlje, voidbornObrana, voidbornNapad, voidbornPrijetnja;
     @FXML private Label voidbornIndustrija, voidbornIstrazivanje, voidbornDiplomacija;
-    @FXML private Label igracZdravlje, igracObrana, igracNapad, igracPlan;
+    @FXML private Label igracZdravlje, igracObrana, igracNapad;
     @FXML private Label igracIndustrija, igracIstrazivanje, igracDiplomacija;
     @FXML private Label uvjetRunde;
-    @FXML private HBox okvirIgraca, okvirVoidborna;
-    @FXML private VBox borbenaZona;
-    @FXML private TextArea dnevnikBorbe;
+    @FXML private VBox okvirIgraca, okvirVoidborna;
+    @FXML private HBox neprijateljiIgracGore, neprijateljiIgracDolje;
+    @FXML private HBox neprijateljiVoidbornGore, neprijateljiVoidbornDolje;
     @FXML private Button gumbKarta1, gumbKarta2, gumbKarta3, gumbKarta4;
     @FXML private Button gumbIzvrsiPlan, gumbPonistiOdabir;
-    @FXML private Button gumbSpremiIgru, gumbReplay, gumbUcitajIgru, gumbDokumentacija, gumbNovaIgra;
+    @FXML private Button gumbSpremiIgru, gumbUcitajIgru, gumbNovaIgra;
 
     private VoidfallEngine engine = new VoidfallEngine();
     private AkcijeDatoteka akcije;
     private Button[] gumbiKarata;
+    private Label[] slotoviIgraca;
+    private Label[] slotoviVoidborna;
     private boolean zauzeto = false;
 
     @FXML
     private void initialize() {
         akcije = new AkcijeDatoteka(engine, this);
         gumbiKarata = new Button[]{gumbKarta1, gumbKarta2, gumbKarta3, gumbKarta4};
-        prikaziPoruku("VOIDFALL - izaberite 3 karte");
+        slotoviIgraca = new Label[]{igracSlot1, igracSlot2, igracSlot3};
+        slotoviVoidborna = new Label[]{voidbornSlot1, voidbornSlot2, voidbornSlot3};
+        prikaziPoruku(uputaRunde());
         osvjeziSucelje();
     }
 
@@ -50,18 +54,37 @@ public class GlavniKontroler {
         nit.start();
     }
 
-    public void pulsirajSektor(boolean igrac) {
-        if (igrac) {
-            pokreniNit(new PulsNit(okvirIgraca));
-        } else {
-            pokreniNit(new PulsNit(okvirVoidborna));
-        }
+    private String uputaRunde() {
+        return "RUNDA " + engine.getRunda() + ": odaberi 3 karte i pritisni IZVRŠI PLAN.\n"
+                + "Da korupcija ne raste, do kraja runde moraš imati: "
+                + engine.getKorupcija().kratkiOpis(engine.getRunda()) + ".";
     }
 
     public void prikaziPoruku(String poruka) {
-        dnevnikBorbe.appendText(poruka + "\n");
-        dnevnikBorbe.setScrollTop(Double.MAX_VALUE);
-        oznakaDogadaja.setText(poruka.substring(poruka.lastIndexOf("\n") + 1));
+        oznakaDogadaja.setText(poruka);
+    }
+
+    public void letKarte(AkcijskaKartica karta, boolean igrac, int indeks) {
+        Label slot = slotoviVoidborna[indeks];
+        if (igrac) {
+            slot = slotoviIgraca[indeks];
+        }
+        new LetKarte(letecaKarta, slot, karta, igrac).leti();
+    }
+
+    public void napadnutSektor(boolean igrac) {
+        if (igrac) {
+            pokreniNit(new PulsNit(okvirIgraca, neprijateljiIgracGore, neprijateljiIgracDolje));
+        } else {
+            pokreniNit(new PulsNit(okvirVoidborna, neprijateljiVoidbornGore, neprijateljiVoidbornDolje));
+        }
+    }
+
+    private void sakrijVoidbornovPlan() {
+        for (int i = 0; i < 3; i++) {
+            slotoviVoidborna[i].setText("?");
+            slotoviVoidborna[i].setStyle("");
+        }
     }
 
     public void osvjeziSucelje() {
@@ -70,8 +93,7 @@ public class GlavniKontroler {
         ArrayList<AkcijskaKartica> ruka = engine.getIgrac().getRuka();
         ArrayList<AkcijskaKartica> plan = engine.getIgrac().getOdabranePlan();
         boolean zavrsna = engine.getRunda() > 3;
-        boolean kraj = engine.getBorba().isKraj();
-        boolean slobodno = !zauzeto && !kraj;
+        boolean slobodno = !zauzeto && !engine.getBorba().isKraj();
 
         oznakaKorupcije.setText(igracSektor.getKorupcija() + "/3");
         trakaKorupcije.setProgress(igracSektor.getKorupcija() / 3.0);
@@ -81,25 +103,25 @@ public class GlavniKontroler {
         voidbornPrijetnja.setText("Razina prijetnje: " + engine.getKorupcija().razinaPrijetnje());
         trakaZdravljaIgraca.setProgress(igracSektor.getZdravlje() / 10.0);
         trakaZdravljaVoidborna.setProgress(voidborn.getZdravlje() / 10.0);
-        oznakaBorbaIgrac.setText("IGRAČ " + igracSektor.getZdravlje() + "/10");
-        oznakaBorbaVoidborn.setText("VOIDBORN " + voidborn.getZdravlje() + "/10");
-        String neprijatelji = "";
-        for (int i = 0; i < voidborn.getNapad(); i++) {
-            neprijatelji += "# ";
-        }
-        igracNeprijatelji.setText("Neprijatelji u sektoru: " + neprijatelji);
         prikaziSektor(voidborn, voidbornZdravlje, voidbornObrana, voidbornNapad,
                 voidbornIndustrija, voidbornIstrazivanje, voidbornDiplomacija);
         prikaziSektor(igracSektor, igracZdravlje, igracObrana, igracNapad,
                 igracIndustrija, igracIstrazivanje, igracDiplomacija);
-        voidbornPlan.setText(engine.planVoidborna());
-        igracPlan.setText(engine.planIgraca());
 
+        for (int i = 0; i < 3; i++) {
+            if (i < plan.size()) {
+                slotoviIgraca[i].setText(plan.get(i).getNaziv());
+            } else {
+                slotoviIgraca[i].setText("prazno");
+                slotoviIgraca[i].setStyle("");
+            }
+        }
         for (int i = 0; i < 4; i++) {
             if (i < ruka.size()) {
                 AkcijskaKartica karta = ruka.get(i);
-                gumbiKarata[i].setText(karta.getNaziv() + "\n" + karta.getOpis());
-                gumbiKarata[i].setDisable(zauzeto || kraj || plan.contains(karta));
+                gumbiKarata[i].setText(karta.getVrsta().getKategorija() + "\n"
+                        + karta.getNaziv() + "\n" + karta.getOpis());
+                gumbiKarata[i].setDisable(!slobodno || plan.contains(karta));
             } else {
                 gumbiKarata[i].setText("-");
                 gumbiKarata[i].setDisable(true);
@@ -130,8 +152,8 @@ public class GlavniKontroler {
     @FXML
     private void novaIgra() {
         engine.novaIgra();
-        dnevnikBorbe.clear();
-        prikaziPoruku("Nova igra - izaberite 3 karte");
+        sakrijVoidbornovPlan();
+        prikaziPoruku(uputaRunde());
         osvjeziSucelje();
     }
 
@@ -152,12 +174,13 @@ public class GlavniKontroler {
             return;
         }
         zauzeto = true;
+        sakrijVoidbornovPlan();
         osvjeziSucelje();
         if (engine.getRunda() <= 3) {
-            prikaziPoruku("--- Runda " + engine.getRunda() + " ---");
+            prikaziPoruku("RUNDA " + engine.getRunda() + ": karte se bacaju redom iz plana...");
             pokreniNit(new VoidbornNit(engine, this));
         } else {
-            prikaziPoruku("--- ZAVRŠNA BORBA ---");
+            prikaziPoruku("ZAVRŠNA BORBA!");
             pokreniNit(new ZavrsnaBorbaNit(engine, this));
         }
     }
@@ -168,12 +191,13 @@ public class GlavniKontroler {
             zavrsiIgru();
             return;
         }
-        prikaziPoruku(engine.zavrsiRundu());
+        String poruka = engine.zavrsiRundu() + "\n";
         if (engine.getRunda() <= 3) {
-            prikaziPoruku("--- Runda " + engine.getRunda() + ": izaberite 3 karte ---");
+            poruka += uputaRunde();
         } else {
-            prikaziPoruku("--- Razvoj gotov. Pritisnite ZAVRŠNA BORBA ---");
+            poruka += "Razvoj je gotov. Pritisni ZAVRŠNA BORBA.";
         }
+        prikaziPoruku(poruka);
         osvjeziSucelje();
     }
 
