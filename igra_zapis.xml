@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <igra>
-  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="10" korupcija="0" opis="Igrač: Popravak - +3 zdravlje"/>
-  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="10" korupcija="0" opis="Voidborn: Industrijalizacija - +1 industrija, +1 obrana"/>
-  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="10" korupcija="0" opis="Igrač: Nova tehnologija - +2 napad"/>
-  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="10" korupcija="0" opis="Voidborn: Industrijalizacija - +1 industrija, +1 obrana"/>
-  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="10" korupcija="0" opis="Igrač: Diplomacija - +1 diplomacija, -1 korupcija"/>
-  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="10" korupcija="0" opis="Voidborn: Utvrda - +2 obrana"/>
-  <dogadaj runda="1" vrsta="KORUPCIJA" zdravljeIgraca="10" zdravljeVoidborna="10" korupcija="1" opis="KRAJ RUNDE 1. Uvjet 'industrija najmanje 1 (imaš 0)' NIJE ispunjen, korupcija raste za 1."/>
-  <dogadaj runda="1" vrsta="KRAJ_RUNDE" zdravljeIgraca="10" zdravljeVoidborna="10" korupcija="1" opis="Kraj runde 1."/>
-  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="1" opis="Igrač: Rizični eksperiment - +3 napad, tvoje zdravlje -2"/>
-  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="1" opis="Voidborn: Špijunaža - +1 istraživanje, protivniku -1 obrana"/>
-  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="1" opis="Igrač: Sabotaža - Protivniku -1 napad i -1 obrana"/>
-  <dogadaj runda="2" vrsta="KORUPCIJA" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="2" opis="Voidborn: Korupcija - +1 korupcija"/>
-  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="2" opis="Igrač: Trgovina - +1 industrija, +1 istraživanje"/>
-  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="2" opis="Voidborn: Sabotaža - Protivniku -1 napad i -1 obrana"/>
-  <dogadaj runda="2" vrsta="KORUPCIJA" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="3" opis="KRAJ RUNDE 2. Uvjet 'istraživanje najmanje 2 (imaš 1)' NIJE ispunjen, korupcija raste za 1."/>
-  <dogadaj runda="2" vrsta="KRAJ_RUNDE" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="3" opis="Kraj runde 2."/>
-  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="10" korupcija="3" opis="Igrač: Špijunaža - +1 istraživanje, protivniku -1 obrana"/>
-  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="5" zdravljeVoidborna="10" korupcija="3" opis="Voidborn: Precizni udar - Protivniku -3 zdravlje, tvoja obrana -1"/>
-  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="5" zdravljeVoidborna="10" korupcija="3" opis="Igrač: Utvrda - +2 obrana"/>
-  <dogadaj runda="3" vrsta="KORUPCIJA" zdravljeIgraca="5" zdravljeVoidborna="10" korupcija="3" opis="Voidborn: Korupcija - +1 korupcija"/>
-  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="5" zdravljeVoidborna="8" korupcija="3" opis="Igrač: Orbitalni napad - Protivniku -2 zdravlje"/>
-  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="5" zdravljeVoidborna="8" korupcija="3" opis="Voidborn: Nova tehnologija - +2 napad"/>
-  <dogadaj runda="3" vrsta="KRAJ_RUNDE" zdravljeIgraca="5" zdravljeVoidborna="8" korupcija="3" opis="Kraj runde 3."/>
-  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="5" zdravljeVoidborna="8" korupcija="3" opis="Voidborn napada (napad 2, obrana branitelja 2): šteta 0. Obrana popušta na 1."/>
-  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="5" zdravljeVoidborna="5" korupcija="3" opis="Igrač napada (napad 4, obrana branitelja 1): šteta 3."/>
-  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="4" zdravljeVoidborna="5" korupcija="3" opis="Voidborn napada (napad 2, obrana branitelja 1): šteta 1."/>
-  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="4" zdravljeVoidborna="2" korupcija="3" opis="Igrač napada (napad 4, obrana branitelja 1): šteta 3."/>
-  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="3" zdravljeVoidborna="2" korupcija="3" opis="Voidborn napada (napad 2, obrana branitelja 1): šteta 1."/>
-  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="3" zdravljeVoidborna="0" korupcija="3" opis="Igrač napada (napad 4, obrana branitelja 1): šteta 3."/>
+  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="8" korupcija="0" opis="Igrač: Orbitalni napad - Protivniku -2 zdravlje"/>
+  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="8" korupcija="0" opis="Voidborn: Istraživanje - +1 istraživanje, +1 napad"/>
+  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="8" korupcija="0" opis="Igrač: Trgovina - +1 industrija, +1 istraživanje"/>
+  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="8" korupcija="0" opis="Voidborn: Istraživanje - +1 istraživanje, +1 napad"/>
+  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="8" korupcija="0" opis="Igrač: Istraživanje - +1 istraživanje, +1 napad"/>
+  <dogadaj runda="1" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="8" korupcija="0" opis="Voidborn: Utvrda - +2 obrana"/>
+  <dogadaj runda="1" vrsta="KRAJ_RUNDE" zdravljeIgraca="10" zdravljeVoidborna="8" korupcija="0" opis="Kraj runde 1."/>
+  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="4" korupcija="0" opis="Igrač: Preopterećenje - Protivniku -4 zdravlje, tebi -2"/>
+  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="0" opis="Voidborn: Popravak - +3 zdravlje"/>
+  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="4" korupcija="0" opis="Igrač: Precizni udar - Protivniku -3 zdravlje, tvoja obrana -1"/>
+  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="0" opis="Voidborn: Popravak - +3 zdravlje"/>
+  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="0" opis="Igrač: Utvrda - +2 obrana"/>
+  <dogadaj runda="2" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="0" opis="Voidborn: Nova tehnologija - +2 napad"/>
+  <dogadaj runda="2" vrsta="KRAJ_RUNDE" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="0" opis="Kraj runde 2."/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="5" korupcija="0" opis="Igrač: Zasjeda - Protivniku -2 zdravlje, +1 napad"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="5" korupcija="0" opis="Voidborn: Utvrda - +2 obrana"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="5" korupcija="0" opis="Igrač: Evakuacija - +2 zdravlje, +1 obrana"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="5" korupcija="0" opis="Voidborn: Istraživanje - +1 istraživanje, +1 napad"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="5" korupcija="1" opis="Igrač: Kontaminirani signal - +2 napad, +1 obrana, +1 korupcija"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="10" zdravljeVoidborna="5" korupcija="1" opis="Voidborn: Sabotaža - Protivniku -1 napad i -1 obrana"/>
+  <dogadaj runda="3" vrsta="KORUPCIJA" zdravljeIgraca="10" zdravljeVoidborna="5" korupcija="2" opis="KRAJ RUNDE 3. Uvjet 'diplomacija najmanje 1 (imaš 0)' NIJE ispunjen, korupcija raste za 1."/>
+  <dogadaj runda="3" vrsta="KRAJ_RUNDE" zdravljeIgraca="10" zdravljeVoidborna="5" korupcija="2" opis="Kraj runde 3."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="10" zdravljeVoidborna="5" korupcija="2" opis="Igrač napada (napad 3, obrana branitelja 4): šteta 0. Obrana popušta na 3."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="8" zdravljeVoidborna="5" korupcija="2" opis="Voidborn napada (napad 5, obrana branitelja 3): šteta 2."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="8" zdravljeVoidborna="5" korupcija="2" opis="Igrač napada (napad 3, obrana branitelja 3): šteta 0. Obrana popušta na 2."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="6" zdravljeVoidborna="5" korupcija="2" opis="Voidborn napada (napad 5, obrana branitelja 3): šteta 2."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="6" zdravljeVoidborna="4" korupcija="2" opis="Igrač napada (napad 3, obrana branitelja 2): šteta 1."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="4" zdravljeVoidborna="4" korupcija="2" opis="Voidborn napada (napad 5, obrana branitelja 3): šteta 2."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="4" zdravljeVoidborna="3" korupcija="2" opis="Igrač napada (napad 3, obrana branitelja 2): šteta 1."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="2" zdravljeVoidborna="3" korupcija="2" opis="Voidborn napada (napad 5, obrana branitelja 3): šteta 2."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="2" zdravljeVoidborna="2" korupcija="2" opis="Igrač napada (napad 3, obrana branitelja 2): šteta 1."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="0" zdravljeVoidborna="2" korupcija="2" opis="Voidborn napada (napad 5, obrana branitelja 3): šteta 2."/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="0" opis="Igrač: Trgovina - +1 industrija, +1 istraživanje"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="0" opis="Voidborn: Nova tehnologija - +2 napad"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="1" opis="Igrač: Kontaminirani signal - +2 napad, +1 obrana, +1 korupcija"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="7" korupcija="1" opis="Voidborn: Sabotaža - Protivniku -1 napad i -1 obrana"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="8" zdravljeVoidborna="5" korupcija="1" opis="Igrač: Zasjeda - Protivniku -2 zdravlje, +1 napad"/>
+  <dogadaj runda="3" vrsta="KARTA" zdravljeIgraca="6" zdravljeVoidborna="5" korupcija="1" opis="Voidborn: Zasjeda - Protivniku -2 zdravlje, +1 napad"/>
+  <dogadaj runda="3" vrsta="KORUPCIJA" zdravljeIgraca="6" zdravljeVoidborna="5" korupcija="2" opis="KRAJ RUNDE 3. Uvjet 'diplomacija najmanje 1 (imaš 0)' NIJE ispunjen, korupcija raste za 1."/>
+  <dogadaj runda="3" vrsta="KRAJ_RUNDE" zdravljeIgraca="6" zdravljeVoidborna="5" korupcija="2" opis="Kraj runde 3."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="6" zdravljeVoidborna="4" korupcija="2" opis="Igrač napada (napad 3, obrana branitelja 2): šteta 1."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="2" zdravljeVoidborna="4" korupcija="2" opis="Voidborn napada (napad 6, obrana branitelja 2): šteta 4."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="2" zdravljeVoidborna="3" korupcija="2" opis="Igrač napada (napad 3, obrana branitelja 2): šteta 1."/>
+  <dogadaj runda="4" vrsta="NAPAD" zdravljeIgraca="0" zdravljeVoidborna="3" korupcija="2" opis="Voidborn napada (napad 6, obrana branitelja 2): šteta 4."/>
 </igra>
