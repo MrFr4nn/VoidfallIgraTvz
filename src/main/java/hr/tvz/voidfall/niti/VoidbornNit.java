@@ -22,7 +22,8 @@ public class VoidbornNit implements Runnable {
             if (engine.getBorba().isKraj()) {
                 break;
             }
-            engine.odigrajKorak(i);
+            String poruka = engine.odigrajKorak(i);
+            int potez = i + 1;
             AkcijskaKartica kartaIgraca = engine.getZadnjaKartaIgraca();
             AkcijskaKartica kartaVoidborna = engine.getZadnjaKartaVoidborna();
             if (kartaIgraca != null) {
@@ -31,9 +32,12 @@ public class VoidbornNit implements Runnable {
             if (kartaVoidborna != null) {
                 kontroler.letKarte(kartaVoidborna, false, i);
             }
-            Platform.runLater(() -> kontroler.osvjeziSucelje());
+            Platform.runLater(() -> {
+                kontroler.prikaziPoruku("RUNDA " + engine.getRunda() + ", potez " + potez + "/" + brojKoraka + ":\n" + poruka);
+                kontroler.osvjeziSucelje();
+            });
         }
-        pricekaj(1000);
+        pricekaj(2500);
         Platform.runLater(() -> kontroler.zavrsiPlan());
     }
 

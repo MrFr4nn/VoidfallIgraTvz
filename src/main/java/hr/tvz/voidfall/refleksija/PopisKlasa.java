@@ -3,6 +3,9 @@ package hr.tvz.voidfall.refleksija;
 import hr.tvz.voidfall.GlavnaAplikacija;
 import hr.tvz.voidfall.ai.VoidbornNPC;
 import hr.tvz.voidfall.dom.ReplayDom;
+import hr.tvz.voidfall.dom.ReplayKorak;
+import hr.tvz.voidfall.kontroleri.PrikazKarata;
+import hr.tvz.voidfall.logika.DnevnikIgre;
 import hr.tvz.voidfall.kontroleri.AkcijeDatoteka;
 import hr.tvz.voidfall.kontroleri.GlavniKontroler;
 import hr.tvz.voidfall.kontroleri.ReplayKontroler;
@@ -26,6 +29,7 @@ import hr.tvz.voidfall.serijalizacija.Spremanje;
 import hr.tvz.voidfall.serijalizacija.StanjeIgre;
 import hr.tvz.voidfall.xml.XmlSaxCitac;
 import hr.tvz.voidfall.xml.XmlZapisivac;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class PopisKlasa {
@@ -49,11 +53,14 @@ public class PopisKlasa {
         popis.put(ReplayNit.class, new Object[]{null});
         popis.put(PulsNit.class, new Object[]{null, null, null});
         popis.put(LetKarte.class, new Object[]{null, null, null, true});
-        popis.put(StanjeIgre.class, new Object[]{new Igrac("Probni"), new Sektor(), 1});
+        popis.put(StanjeIgre.class, new Object[]{new Igrac("Probni"), new Sektor(), 1, new ArrayList<String>()});
         popis.put(Spremanje.class, new Object[]{});
         popis.put(XmlZapisivac.class, new Object[]{});
         popis.put(XmlSaxCitac.class, new Object[]{});
         popis.put(ReplayDom.class, new Object[]{});
+        popis.put(ReplayKorak.class, new Object[]{1, "KARTA", "IGRAC", "Probni opis", new int[6], new int[6], 0, 1});
+        popis.put(DnevnikIgre.class, new Object[]{new VoidfallEngine()});
+        popis.put(PrikazKarata.class, new Object[]{});
         popis.put(OpisAI.class, new Object[]{});
         popis.put(DokumentacijaRefleksijom.class, new Object[]{new LinkedHashMap<Class<?>, Object[]>()});
         popis.put(PopisKlasa.class, new Object[]{});

@@ -33,6 +33,9 @@ public class GlavniKontroler {
 
     private VoidfallEngine engine = new VoidfallEngine();
     private AkcijeDatoteka akcije;
+    private PrikazKarata prikaz = new PrikazKarata();
+    private Label[] igracOznake;
+    private Label[] voidbornOznake;
     private Button[] gumbiKarata;
     private Label[] slotoviIgraca;
     private Label[] slotoviVoidborna;
@@ -44,6 +47,10 @@ public class GlavniKontroler {
         gumbiKarata = new Button[]{gumbKarta1, gumbKarta2, gumbKarta3, gumbKarta4};
         slotoviIgraca = new Label[]{igracSlot1, igracSlot2, igracSlot3};
         slotoviVoidborna = new Label[]{voidbornSlot1, voidbornSlot2, voidbornSlot3};
+        igracOznake = new Label[]{igracZdravlje, igracObrana, igracNapad,
+                igracIndustrija, igracIstrazivanje, igracDiplomacija};
+        voidbornOznake = new Label[]{voidbornZdravlje, voidbornObrana, voidbornNapad,
+                voidbornIndustrija, voidbornIstrazivanje, voidbornDiplomacija};
         prikaziPoruku(uputaRunde());
         osvjeziSucelje();
     }
@@ -103,30 +110,10 @@ public class GlavniKontroler {
         voidbornPrijetnja.setText("Razina prijetnje: " + engine.getKorupcija().razinaPrijetnje());
         trakaZdravljaIgraca.setProgress(igracSektor.getZdravlje() / 10.0);
         trakaZdravljaVoidborna.setProgress(voidborn.getZdravlje() / 10.0);
-        prikaziSektor(voidborn, voidbornZdravlje, voidbornObrana, voidbornNapad,
-                voidbornIndustrija, voidbornIstrazivanje, voidbornDiplomacija);
-        prikaziSektor(igracSektor, igracZdravlje, igracObrana, igracNapad,
-                igracIndustrija, igracIstrazivanje, igracDiplomacija);
-
-        for (int i = 0; i < 3; i++) {
-            if (i < plan.size()) {
-                slotoviIgraca[i].setText(plan.get(i).getNaziv());
-            } else {
-                slotoviIgraca[i].setText("prazno");
-                slotoviIgraca[i].setStyle("");
-            }
-        }
-        for (int i = 0; i < 4; i++) {
-            if (i < ruka.size()) {
-                AkcijskaKartica karta = ruka.get(i);
-                gumbiKarata[i].setText(karta.getVrsta().getKategorija() + "\n"
-                        + karta.getNaziv() + "\n" + karta.getOpis());
-                gumbiKarata[i].setDisable(!slobodno || plan.contains(karta));
-            } else {
-                gumbiKarata[i].setText("-");
-                gumbiKarata[i].setDisable(true);
-            }
-        }
+        prikaz.prikaziSektor(voidborn, voidbornOznake);
+        prikaz.prikaziSektor(igracSektor, igracOznake);
+        prikaz.prikaziPlan(plan, slotoviIgraca);
+        prikaz.prikaziRuku(ruka, plan, slobodno, gumbiKarata);
         if (zavrsna) {
             gumbIzvrsiPlan.setText("ZAVRŠNA BORBA");
         } else {
@@ -137,16 +124,6 @@ public class GlavniKontroler {
         gumbNovaIgra.setDisable(zauzeto);
         gumbSpremiIgru.setDisable(!slobodno);
         gumbUcitajIgru.setDisable(zauzeto);
-    }
-
-    private void prikaziSektor(Sektor s, Label zdravlje, Label obrana, Label napad,
-                               Label industrija, Label istrazivanje, Label diplomacija) {
-        zdravlje.setText("Zdravlje: " + s.getZdravlje() + "/10");
-        obrana.setText("Obrana: " + s.getObrana());
-        napad.setText("Napad: " + s.getNapad());
-        industrija.setText("Industrija: " + s.getPloca().getIndustrija() + "/3");
-        istrazivanje.setText("Istraživanje: " + s.getPloca().getIstrazivanje() + "/3");
-        diplomacija.setText("Diplomacija: " + s.getPloca().getDiplomacija() + "/3");
     }
 
     @FXML

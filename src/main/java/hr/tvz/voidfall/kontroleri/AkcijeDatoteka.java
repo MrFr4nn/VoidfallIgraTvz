@@ -1,6 +1,7 @@
 package hr.tvz.voidfall.kontroleri;
 
 import hr.tvz.voidfall.dom.ReplayDom;
+import hr.tvz.voidfall.dom.ReplayKorak;
 import hr.tvz.voidfall.logika.VoidfallEngine;
 import hr.tvz.voidfall.refleksija.DokumentacijaRefleksijom;
 import hr.tvz.voidfall.refleksija.PopisKlasa;
@@ -57,11 +58,15 @@ public class AkcijeDatoteka {
     public void replay() {
         engine.spremiZapis();
         String saxPoruka = new XmlSaxCitac().procitaj(XmlZapisivac.DATOTEKA);
-        ArrayList<String> redovi = new ReplayDom().ucitaj(XmlZapisivac.DATOTEKA);
+        ReplayDom dom = new ReplayDom();
+        ArrayList<ReplayKorak> koraci = dom.ucitaj(XmlZapisivac.DATOTEKA);
+        if (!dom.getGreska().isEmpty()) {
+            saxPoruka += "\n" + dom.getGreska();
+        }
         try {
             FXMLLoader ucitavac = otvoriProzor("replay_prozor.fxml", "Replay igre");
             ReplayKontroler prozor = ucitavac.getController();
-            prozor.postavi(redovi, saxPoruka);
+            prozor.postavi(koraci, saxPoruka);
         } catch (IOException e) {
             kontroler.prikaziPoruku("Greška pri otvaranju prozora: " + e.getMessage());
         }

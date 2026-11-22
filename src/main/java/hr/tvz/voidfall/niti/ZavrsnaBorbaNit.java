@@ -17,6 +17,7 @@ public class ZavrsnaBorbaNit implements Runnable {
     public void run() {
         boolean igracNapada = Math.random() < 0.5;
         int brojNapada = 0;
+        engine.pocniZavrsnuBorbu(igracNapada);
         while (!engine.getBorba().isKraj() && !engine.getBorba().bezSanse() && brojNapada < 30) {
             pricekaj(1500);
             String poruka = engine.napadni(igracNapada);
