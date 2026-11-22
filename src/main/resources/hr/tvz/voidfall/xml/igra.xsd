@@ -1,24 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="vrstaDogadaja">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="POCETAK_IGRE"/>
+            <xs:enumeration value="POCETAK_RUNDE"/>
+            <xs:enumeration value="PLAN"/>
+            <xs:enumeration value="KARTA"/>
+            <xs:enumeration value="NAPAD"/>
+            <xs:enumeration value="ZDRAVLJE"/>
+            <xs:enumeration value="KORUPCIJA"/>
+            <xs:enumeration value="KRAJ_RUNDE"/>
+            <xs:enumeration value="ZAVRSNA_BORBA"/>
+            <xs:enumeration value="KRAJ_IGRE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="akterDogadaja">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IGRAC"/>
+            <xs:enumeration value="VOIDBORN"/>
+            <xs:enumeration value="SUSTAV"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="zdravlje">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="razina">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="vrijednost">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:element name="igra">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="dogadaj" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
-                        <xs:attribute name="runda" type="xs:int" use="required"/>
-                        <xs:attribute name="vrsta" use="required">
+                        <xs:attribute name="runda" use="required">
                             <xs:simpleType>
-                                <xs:restriction base="xs:string">
-                                    <xs:enumeration value="KARTA"/>
-                                    <xs:enumeration value="NAPAD"/>
-                                    <xs:enumeration value="KORUPCIJA"/>
-                                    <xs:enumeration value="KRAJ_RUNDE"/>
+                                <xs:restriction base="xs:int">
+                                    <xs:minInclusive value="1"/>
+                                    <xs:maxInclusive value="4"/>
                                 </xs:restriction>
                             </xs:simpleType>
                         </xs:attribute>
-                        <xs:attribute name="zdravljeIgraca" type="xs:int" use="required"/>
-                        <xs:attribute name="zdravljeVoidborna" type="xs:int" use="required"/>
-                        <xs:attribute name="korupcija" type="xs:int" use="required"/>
+                        <xs:attribute name="vrsta" type="vrstaDogadaja" use="required"/>
+                        <xs:attribute name="akter" type="akterDogadaja" use="required"/>
+                        <xs:attribute name="igracZdravlje" type="zdravlje" use="required"/>
+                        <xs:attribute name="igracNapad" type="vrijednost" use="required"/>
+                        <xs:attribute name="igracObrana" type="vrijednost" use="required"/>
+                        <xs:attribute name="igracIndustrija" type="razina" use="required"/>
+                        <xs:attribute name="igracIstrazivanje" type="razina" use="required"/>
+                        <xs:attribute name="igracDiplomacija" type="razina" use="required"/>
+                        <xs:attribute name="voidbornZdravlje" type="zdravlje" use="required"/>
+                        <xs:attribute name="voidbornNapad" type="vrijednost" use="required"/>
+                        <xs:attribute name="voidbornObrana" type="vrijednost" use="required"/>
+                        <xs:attribute name="voidbornIndustrija" type="razina" use="required"/>
+                        <xs:attribute name="voidbornIstrazivanje" type="razina" use="required"/>
+                        <xs:attribute name="voidbornDiplomacija" type="razina" use="required"/>
+                        <xs:attribute name="korupcija" type="razina" use="required"/>
+                        <xs:attribute name="prijetnja" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:int">
+                                    <xs:minInclusive value="1"/>
+                                    <xs:maxInclusive value="3"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
                         <xs:attribute name="opis" type="xs:string" use="required"/>
                     </xs:complexType>
                 </xs:element>

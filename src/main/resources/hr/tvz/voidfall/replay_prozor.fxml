@@ -3,12 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="600.0" prefWidth="950.0" stylesheets="@stil.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.voidfall.kontroleri.ReplayKontroler">
+<BorderPane prefHeight="720.0" prefWidth="950.0" stylesheets="@stil.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.voidfall.kontroleri.ReplayKontroler">
     <top>
         <VBox spacing="6.0" styleClass="okvir" BorderPane.alignment="CENTER">
             <children>
@@ -22,11 +23,49 @@
         </VBox>
     </top>
     <center>
-        <TextArea fx:id="tekstReplaya" editable="false" wrapText="true" BorderPane.alignment="CENTER">
+        <VBox spacing="8.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" spacing="12.0">
+                    <children>
+                        <VBox prefWidth="260.0" spacing="3.0" styleClass="okvir">
+                            <children>
+                                <Label styleClass="naslov" text="IGRAČEV SEKTOR" />
+                                <ProgressBar fx:id="trakaIgraca" prefWidth="240.0" progress="1.0" />
+                                <Label fx:id="igracZdravlje" text="Zdravlje: 10/10" />
+                                <Label fx:id="igracNapad" text="Napad: 0" />
+                                <Label fx:id="igracObrana" text="Obrana: 0" />
+                                <Label fx:id="igracIndustrija" text="Industrija: 0" />
+                                <Label fx:id="igracIstrazivanje" text="Istraživanje: 0" />
+                                <Label fx:id="igracDiplomacija" text="Diplomacija: 0" />
+                            </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefWidth="200.0" spacing="6.0" styleClass="okvir">
+                            <children>
+                                <Label fx:id="oznakaRunde" styleClass="naslov" text="Runda: 1/4" />
+                                <Label fx:id="oznakaKorupcije" text="Korupcija: 0/3   Razina prijetnje: 1" wrapText="true" />
+                                <ProgressBar fx:id="trakaKorupcije" prefWidth="180.0" progress="0.0" />
+                            </children>
+                        </VBox>
+                        <VBox prefWidth="260.0" spacing="3.0" styleClass="okvir">
+                            <children>
+                                <Label styleClass="naslov" text="VOIDBORNOV SEKTOR" />
+                                <ProgressBar fx:id="trakaVoidborna" prefWidth="240.0" progress="1.0" />
+                                <Label fx:id="voidbornZdravlje" text="Zdravlje: 10/10" />
+                                <Label fx:id="voidbornNapad" text="Napad: 0" />
+                                <Label fx:id="voidbornObrana" text="Obrana: 0" />
+                                <Label fx:id="voidbornIndustrija" text="Industrija: 0" />
+                                <Label fx:id="voidbornIstrazivanje" text="Istraživanje: 0" />
+                                <Label fx:id="voidbornDiplomacija" text="Diplomacija: 0" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <TextArea fx:id="tekstReplaya" editable="false" wrapText="true" VBox.vgrow="ALWAYS" />
+            </children>
             <BorderPane.margin>
                 <Insets left="10.0" right="10.0" />
             </BorderPane.margin>
-        </TextArea>
+        </VBox>
     </center>
     <bottom>
         <HBox alignment="CENTER" spacing="12.0" BorderPane.alignment="CENTER">

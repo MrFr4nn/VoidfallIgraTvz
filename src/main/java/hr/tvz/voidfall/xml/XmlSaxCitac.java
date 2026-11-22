@@ -15,6 +15,10 @@ public class XmlSaxCitac extends DefaultHandler {
     private int brojDogadaja;
     private int brojKarata;
     private int brojNapada;
+    private int brojPromjenaZdravlja;
+    private int brojPromjenaKorupcije;
+    private int brojKrajevaRunde;
+    private boolean imaKrajIgre;
 
     @Override
     public void startElement(String uri, String lokalnoIme, String imeElementa, Attributes atributi) {
@@ -23,9 +27,16 @@ public class XmlSaxCitac extends DefaultHandler {
             String vrsta = atributi.getValue("vrsta");
             if (vrsta.equals("KARTA")) {
                 brojKarata = brojKarata + 1;
-            }
-            if (vrsta.equals("NAPAD")) {
+            } else if (vrsta.equals("NAPAD")) {
                 brojNapada = brojNapada + 1;
+            } else if (vrsta.equals("ZDRAVLJE")) {
+                brojPromjenaZdravlja = brojPromjenaZdravlja + 1;
+            } else if (vrsta.equals("KORUPCIJA")) {
+                brojPromjenaKorupcije = brojPromjenaKorupcije + 1;
+            } else if (vrsta.equals("KRAJ_RUNDE")) {
+                brojKrajevaRunde = brojKrajevaRunde + 1;
+            } else if (vrsta.equals("KRAJ_IGRE")) {
+                imaKrajIgre = true;
             }
         }
     }
@@ -39,6 +50,10 @@ public class XmlSaxCitac extends DefaultHandler {
         brojDogadaja = 0;
         brojKarata = 0;
         brojNapada = 0;
+        brojPromjenaZdravlja = 0;
+        brojPromjenaKorupcije = 0;
+        brojKrajevaRunde = 0;
+        imaKrajIgre = false;
         try {
             SchemaFactory tvornica = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema shema = tvornica.newSchema(XmlSaxCitac.class.getResource("/hr/tvz/voidfall/xml/igra.xsd"));
@@ -47,8 +62,14 @@ public class XmlSaxCitac extends DefaultHandler {
             fabrika.setSchema(shema);
             SAXParser parser = fabrika.newSAXParser();
             parser.parse(new File(datoteka), this);
-            return "SAX: XML je ispravan prema XSD-u. Događaja: " + brojDogadaja
-                    + " (karata: " + brojKarata + ", napada: " + brojNapada + ")";
+            String kraj = "igra još traje";
+            if (imaKrajIgre) {
+                kraj = "igra završena";
+            }
+            return "SAX: XML je ispravan prema XSD-u. Događaja: " + brojDogadaja + " (karata: " + brojKarata
+                    + ", napada: " + brojNapada + ", promjena zdravlja: " + brojPromjenaZdravlja
+                    + ", promjena korupcije: " + brojPromjenaKorupcije + ", završenih rundi: "
+                    + brojKrajevaRunde + ", " + kraj + ")";
         } catch (Exception e) {
             return "SAX: greška - " + e.getMessage();
         }
