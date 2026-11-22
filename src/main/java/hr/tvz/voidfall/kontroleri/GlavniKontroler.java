@@ -1,3 +1,4 @@
+
 package hr.tvz.voidfall.kontroleri;
 
 import hr.tvz.voidfall.logika.VoidfallEngine;
@@ -169,6 +170,7 @@ public class GlavniKontroler {
             return;
         }
         String poruka = engine.zavrsiRundu() + "\n";
+        sakrijVoidbornovPlan();
         if (engine.getRunda() <= 3) {
             poruka += uputaRunde();
         } else {
@@ -186,7 +188,7 @@ public class GlavniKontroler {
     }
 
     @FXML private void spremiIgru() { akcije.spremi(); }
-    @FXML private void ucitajIgru() { akcije.ucitaj(); osvjeziSucelje(); }
+    @FXML private void ucitajIgru() { akcije.ucitaj(); sakrijVoidbornovPlan(); osvjeziSucelje(); }
     @FXML private void prikaziDokumentaciju() { akcije.dokumentacija(); }
     @FXML private void pokreniReplay() { akcije.replay(); }
 }

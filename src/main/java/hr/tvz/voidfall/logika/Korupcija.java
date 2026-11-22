@@ -10,6 +10,14 @@ public class Korupcija {
         this.sektor = sektor;
     }
 
+    public int trenutna() {
+        return sektor.getKorupcija();
+    }
+
+    public boolean jeIgracev(Sektor drugi) {
+        return drugi == sektor;
+    }
+
     public synchronized void promijeni(int promjena) {
         sektor.setKorupcija(sektor.getKorupcija() + promjena);
     }

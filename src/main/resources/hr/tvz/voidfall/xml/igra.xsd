@@ -34,9 +34,7 @@
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="vrijednost">
-        <xs:restriction base="xs:int">
-            <xs:minInclusive value="0"/>
-        </xs:restriction>
+        <xs:restriction base="xs:int"/>
     </xs:simpleType>
 
     <xs:element name="igra">

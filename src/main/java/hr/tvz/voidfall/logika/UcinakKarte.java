@@ -5,9 +5,12 @@ import hr.tvz.voidfall.modeli.FrakcijskaPloca;
 import hr.tvz.voidfall.modeli.Sektor;
 
 public class UcinakKarte {
-    private int najvecaVrijednost = 6;
+    private String napomene = "";
+    private Korupcija trenutnaKorupcija;
 
     public String izvrsi(AkcijskaKartica karta, Sektor svoj, Sektor protivnik, Korupcija korupcija) {
+        napomene = "";
+        trenutnaKorupcija = korupcija;
         FrakcijskaPloca ploca = svoj.getPloca();
         switch (karta.getVrsta()) {
             case INDUSTRIJALIZACIJA:
@@ -20,7 +23,7 @@ public class UcinakKarte {
                 break;
             case DIPLOMACIJA:
                 ploca.setDiplomacija(ploca.getDiplomacija() + 1);
-                korupcija.promijeni(-1);
+                promijeniKorupciju(korupcija, -1);
                 break;
             case POPRAVAK:
                 promijeniZdravlje(svoj, 3);
@@ -47,7 +50,7 @@ public class UcinakKarte {
                 ploca.setIstrazivanje(ploca.getIstrazivanje() + 1);
                 break;
             case MIROVNI_SPORAZUM:
-                korupcija.promijeni(-2);
+                promijeniKorupciju(korupcija, -2);
                 break;
             case RIZICNI_EKSPERIMENT:
                 promijeniNapad(svoj, 3);
@@ -70,13 +73,13 @@ public class UcinakKarte {
                 promijeniObranu(protivnik, -1);
                 break;
             case PRECISCAVANJE:
-                korupcija.promijeni(-1);
+                promijeniKorupciju(korupcija, -1);
                 promijeniZdravlje(svoj, 2);
                 break;
             case KONTAMINIRANI_SIGNAL:
                 promijeniNapad(svoj, 2);
                 promijeniObranu(svoj, 1);
-                korupcija.promijeni(1);
+                promijeniKorupciju(korupcija, 1);
                 break;
             case EVAKUACIJA:
                 promijeniZdravlje(svoj, 2);
@@ -87,27 +90,45 @@ public class UcinakKarte {
                 promijeniZdravlje(svoj, -2);
                 break;
             case KORUPCIJA:
-                korupcija.promijeni(1);
+                promijeniKorupciju(korupcija, 1);
                 break;
         }
-        return karta.getOpis();
+        return karta.getOpis() + napomene;
+    }
+
+    private void dodajNapomenu(String tekst) {
+        if (napomene.isEmpty()) {
+            napomene = " [" + tekst + "]";
+        } else {
+            napomene = napomene.substring(0, napomene.length() - 1) + " " + tekst + "]";
+        }
     }
 
     private void promijeniZdravlje(Sektor sektor, int promjena) {
+        if (sektor.getZdravlje() + promjena > 10) {
+            String cije = "Voidborna";
+            if (trenutnaKorupcija.jeIgracev(sektor)) {
+                cije = "igrača";
+            }
+            dodajNapomenu("Zdravlje " + cije + " je na maksimumu (10/10), ne može više.");
+        }
         sektor.setZdravlje(sektor.getZdravlje() + promjena);
     }
 
+    private void promijeniKorupciju(Korupcija korupcija, int promjena) {
+        if (korupcija.trenutna() + promjena > 3) {
+            dodajNapomenu("Korupcija ne može ići iznad 3.");
+        } else if (korupcija.trenutna() + promjena < 0) {
+            dodajNapomenu("Korupcija ne može ići u minus (najmanje 0).");
+        }
+        korupcija.promijeni(promjena);
+    }
+
     private void promijeniNapad(Sektor sektor, int promjena) {
-        sektor.setNapad(ogranici(sektor.getNapad() + promjena));
+        sektor.setNapad(sektor.getNapad() + promjena);
     }
 
     private void promijeniObranu(Sektor sektor, int promjena) {
-        sektor.setObrana(ogranici(sektor.getObrana() + promjena));
-    }
-
-    private int ogranici(int vrijednost) {
-        if (vrijednost > najvecaVrijednost) vrijednost = najvecaVrijednost;
-        if (vrijednost < 0) vrijednost = 0;
-        return vrijednost;
+        sektor.setObrana(sektor.getObrana() + promjena);
     }
 }

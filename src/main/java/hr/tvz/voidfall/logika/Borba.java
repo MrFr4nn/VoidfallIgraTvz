@@ -45,7 +45,8 @@ public class Borba {
     }
 
     public boolean bezSanse() {
-        return igrac.getNapad() == 0 && voidborn.getNapad() == 0;
+        return izracunajStetu(igrac, voidborn) == 0 && izracunajStetu(voidborn, igrac) == 0
+                && igrac.getObrana() <= 0 && voidborn.getObrana() <= 0;
     }
 
     public void provjeriKraj() {
